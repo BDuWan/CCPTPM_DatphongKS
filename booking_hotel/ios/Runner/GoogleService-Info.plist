@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>909186721099-0n0urjmmil6sm17htjgf8v13ndu4c2g5.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.909186721099-0n0urjmmil6sm17htjgf8v13ndu4c2g5</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBY83t-3eGxos-2zZ57Xn3g4B91Vwh8yoo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>909186721099</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.bookingHotel</string>
+	<key>PROJECT_ID</key>
+	<string>bookinghotel-d529e</string>
+	<key>STORAGE_BUCKET</key>
+	<string>bookinghotel-d529e.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:909186721099:ios:c84687249c42d72175f4ce</string>
+	<key>DATABASE_URL</key>
+	<string>https://bookinghotel-d529e-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
