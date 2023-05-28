@@ -1,28 +1,28 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RoomModel {
-  final String? id;
-  final int floor;
-  final int numofper;
-  final int cost;
+  String? roomid;
+  int floor;
+  int capacity;
+  int cost;
 
-  const RoomModel(
-      {this.id,
+  RoomModel(
+      {this.roomid,
       required this.floor,
-      required this.numofper,
+      required this.capacity,
       required this.cost});
 
   toJson() {
-    return {'id': id, 'floor': floor, 'numofper': numofper, 'cost': cost};
+    return {'id': roomid, 'floor': floor, 'capacity': capacity, 'cost': cost};
   }
 
   factory RoomModel.fromSnapShot(
       DocumentSnapshot<Map<String, dynamic>> document) {
     final data = document.data()!;
     return RoomModel(
-      id: document.id,
+      roomid: document.id,
       floor: data['floor'],
-      numofper: data['numofper'],
+      capacity: data['capacity'],
       cost: data['cost'],
     );
   }

@@ -1,28 +1,31 @@
-import 'dart:async';
-
-import 'package:firebase_database/firebase_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserModel {
-  String? id;
+  String? userid;
+  String email;
   String name;
   String phone;
 
   UserModel({
-    this.id,
+    this.userid,
+    required this.email,
     required this.name,
     required this.phone,
   });
 
   toJson() {
-    return {'id': id, 'name': name, 'phone': phone};
+    return {'email': email, 'name': name, 'phone': phone};
   }
 
-  factory UserModel.fromSnapshot(DataSnapshot snapshot) {
-    Map<String, dynamic> data = snapshot.value as Map<String, dynamic>;
+
+  factory UserModel.fromSnapShot(
+      DocumentSnapshot<Map<String, dynamic>> document) {
+    final data = document.data()!;
     return UserModel(
-      id: snapshot.key ?? '',
-      name: data['name'] ?? '',
-      phone: data['phone'] ?? '',
+      userid: document.id,
+      email: data['email'],
+      name: data['name'],
+      phone: data['phone'],
     );
   }
 }

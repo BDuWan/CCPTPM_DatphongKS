@@ -1,9 +1,8 @@
+import 'package:booking_hotel/providers/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'Screens/IntroScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
-
-import 'blocs/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,7 +10,7 @@ void main() async {
   runApp(
     ChangeNotifierProvider(
       create: (context) => MyProvider(),
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
