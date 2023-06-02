@@ -31,9 +31,9 @@ class _BookingScreenState extends State<BookingScreen> {
       appBar: AppBar(
         title: const Text('Thông tin chi tiết phòng'),
       ),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
-          children: [
+          children: const [
             RoomInfor(),
             SizedBox(
               height: 20,

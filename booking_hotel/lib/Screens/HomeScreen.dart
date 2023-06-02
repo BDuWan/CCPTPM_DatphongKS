@@ -1,4 +1,5 @@
 import 'package:booking_hotel/Screens/ShowRoomScreen.dart';
+import 'package:booking_hotel/dialog/LoadingDialog.dart';
 import 'package:booking_hotel/dialog/MsgDialog.dart';
 import 'package:booking_hotel/model/user_model.dart';
 import 'package:flutter/material.dart';
@@ -12,37 +13,37 @@ import 'bottom_navigation.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
-
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   @override
   Widget build(BuildContext context) {
+    LoadingDialog.hideLoadingDialog();
     MyProvider provider = context.read<MyProvider>();
     Get.put(UserRepository());
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: FutureBuilder<UserModel>(
-            future: UserRepository.instance.getUserById(provider.curUserId),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Text(
-                  'Chào mừng ${snapshot.data!.name}',
-                );
-              } else if (snapshot.hasError) {
-                return Text('Error: ${snapshot.error}');
-              }
-              return const Text('Loading...');
-            },
+          appBar: AppBar(
+            title: FutureBuilder<UserModel>(
+              future: UserRepository().getUserById(provider.curUserId),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Text(
+                    'Chào mừng ${snapshot.data!.name}',
+                  );
+                } else if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                }
+                return const Text('Loading...');
+              },
+            ),
           ),
-        ),
-        body: const HomeBody(),
-        bottomNavigationBar: const BottomNavigation(currentIndex: 0,)
-      ),
+          body: const HomeBody(),
+          bottomNavigationBar: const BottomNavigation(
+            currentIndex: 0,
+          )),
     );
   }
 }
@@ -64,57 +65,55 @@ class _HomeBodyState extends State<HomeBody> {
     Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-        SizedBox(
-            height: size.height * 0.2,
-            child: Form(
-              key: _formkey,
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  TextFormField(
-                    style: const TextStyle(fontSize: 20),
-                    onChanged: (value) {
-                      setState(() {
-                        roomId = value;
-                      });
-                    },
-                    validator: (value) {
-                      roomId = value!;
-                      if (roomId.isEmpty) {
-                        return 'Bạn chưa nhập id phòng cần tìm';
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                        labelText: 'Tìm kiếm',
-                        hintText: 'Nhập id phòng bạn cần tìm',
-                        prefixIcon: Image.asset(
-                          'assets/images/search.png',
-                          width: 30,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5.0),
-                        ),
-                        contentPadding: const EdgeInsets.fromLTRB(10, 1, 0, 1)),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      if (_formkey.currentState!.validate()) {
-                        provider.setRoomId(roomId);
-                        Helper.nextPage(context, const ShowRoomScreen());
-                      }
-                    },
-                    child:
-                        const Text(style: TextStyle(fontSize: 20), 'Tìm kiếm'),
-                  ),
-                ],
+        Form(
+          key: _formkey,
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 10,
               ),
-            )),
+              TextFormField(
+                style: const TextStyle(fontSize: 20),
+                onChanged: (value) {
+                  setState(() {
+                    roomId = value;
+                  });
+                },
+                validator: (value) {
+                  roomId = value!;
+                  if (roomId.isEmpty) {
+                    return 'Bạn chưa nhập id phòng cần tìm';
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                    labelText: 'Tìm kiếm',
+                    hintText: 'Nhập id phòng bạn cần tìm',
+                    prefixIcon: Image.asset(
+                      'assets/images/search.png',
+                      width: 30,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                    contentPadding: const EdgeInsets.fromLTRB(10, 1, 0, 1)),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  if (_formkey.currentState!.validate()) {
+                    provider.setRoomId(roomId);
+                    Helper.nextPage(context, const ShowRoomScreen());
+                  }
+                },
+                child:
+                    const Text(style: TextStyle(fontSize: 20), 'Tìm kiếm'),
+              ),
+            ],
+          ),
+        ),
         const SizedBox(
           height: 30,
         ),
@@ -224,8 +223,8 @@ class _HomeBody2State extends State<HomeBody2> {
                 const SizedBox(
                   height: 30,
                 ),
-                const Row(
-                  children: [
+                Row(
+                  children: const [
                     Text(
                       'Khoảng giá tiền:',
                       style: TextStyle(fontSize: 25),

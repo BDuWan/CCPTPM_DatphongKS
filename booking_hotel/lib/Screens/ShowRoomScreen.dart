@@ -38,7 +38,7 @@ class RoomListWidget extends StatelessWidget {
     MyProvider provider = context.read<MyProvider>();
     Get.put(RoomRepository());
     return FutureBuilder<List<RoomModel>>(
-      future: RoomRepository.instance.getListRoomById(provider.roomId),
+      future: RoomRepository().getListRoomById(provider.roomId),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           final rooms = snapshot.data!;

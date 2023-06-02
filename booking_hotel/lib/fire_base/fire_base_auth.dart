@@ -5,14 +5,16 @@ import 'package:get/get.dart';
 import '../repository/user_repository.dart';
 
 class FireAuth {
-  late final FirebaseAuth firebaseAuth= FirebaseAuth.instance;
-  DatabaseReference? dbRef = FirebaseDatabase.instance.ref().child('userinfo');
+  late final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  late UserCredential currentUser;
+  DatabaseReference? db = FirebaseDatabase.instance.ref().child('userinfo');
 
   void Register(String email, String pass, String name, String phone,
-      Function onSuccess, Function(String) onRegisterErr) {
+      String address, Function onSuccess, Function(String) onRegisterErr) {
     Get.put(UserRepository());
     final UserRepository userRepository = UserRepository.instance;
-    UserModel userModel = UserModel(email: email, name: name, phone: phone);
+    UserModel userModel =
+        UserModel(email: email, name: name, phone: phone, address: address);
     firebaseAuth
         .createUserWithEmailAndPassword(email: email, password: pass)
         .then((user) {
@@ -46,7 +48,7 @@ class FireAuth {
       String? curUID = user.user?.uid;
       onSuccess(curUID!);
     }).catchError((err) {
-      onLoginErr("Đăng nhập thất bại, sai tên tài khoản hoặc mật khẩu");
+      onLoginErr("Đăng nhập thất bại");
     });
   }
 
@@ -58,5 +60,14 @@ class FireAuth {
         .child(property);
     DatabaseEvent event = await ref.once();
     return event.snapshot.value as String;
+  }
+
+  void changePass(String newPassword, Function onSuccess, Function onError) {
+    User? user = firebaseAuth.currentUser;
+    user!.updatePassword(newPassword).then((_) {
+      onSuccess();
+    }).catchError((error) {
+      onError();
+    });
   }
 }

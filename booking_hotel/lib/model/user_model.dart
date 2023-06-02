@@ -5,16 +5,18 @@ class UserModel {
   String email;
   String name;
   String phone;
+  String address;
 
   UserModel({
     this.userid,
     required this.email,
     required this.name,
     required this.phone,
+    required this.address
   });
 
   toJson() {
-    return {'email': email, 'name': name, 'phone': phone};
+    return {'email': email, 'name': name, 'phone': phone, 'address': address};
   }
 
 
@@ -26,6 +28,7 @@ class UserModel {
       email: data['email'],
       name: data['name'],
       phone: data['phone'],
+      address: data['address']
     );
   }
 }

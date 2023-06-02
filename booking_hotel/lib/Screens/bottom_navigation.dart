@@ -1,5 +1,7 @@
 import 'package:booking_hotel/Helper.dart';
 import 'package:booking_hotel/Screens/ListBillScreen.dart';
+import 'package:booking_hotel/Screens/SettingScreen.dart';
+import 'package:booking_hotel/Screens/UserInfoScreen.dart';
 import 'package:flutter/material.dart';
 
 import 'HomeScreen.dart';
@@ -37,10 +39,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
             Helper.newPage(context, const ListBillScreen());
             break;
           case 2:
-            Helper.newPage(context, HomeScreen());
+            Helper.newPage(context, const UserInfoScreen());
             break;
           case 3:
-            Helper.newPage(context, HomeScreen());
+            Helper.newPage(context, const SettingScreen());
             break;
         }
       },

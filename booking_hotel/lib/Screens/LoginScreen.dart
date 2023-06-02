@@ -15,7 +15,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Đăng nhập')),
-      body: LoginBody(),
+      body: const LoginBody(),
     );
   }
 }
@@ -114,14 +114,13 @@ class _LoginBodyState extends State<LoginBody> {
                         email,
                         password,
                         (curUID) {
-                          LoadingDialog.hideLoadingDialog(context);
+                          LoadingDialog.hideLoadingDialog();
                           MyProvider provider = context.read<MyProvider>();
                           provider.setCurUserId(curUID);
                           Helper.nextPage(context, const HomeScreen());
-                          //MsgDialog.showMsgDialog(context, "Errol", FireAuth().getPropertyById('FkDM1mbZp4YKe5gejPEX7Mj1Oqg1', 'name') as String);
                         },
                         (msg) {
-                          LoadingDialog.hideLoadingDialog(context);
+                          LoadingDialog.hideLoadingDialog();
                           MsgDialog.showMsgDialog(context, "Errol", msg);
                         });
                   }

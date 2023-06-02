@@ -12,7 +12,7 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Đăng kí')),
-      body: RegisterBody(),
+      body: const RegisterBody(),
     );
   }
 }
@@ -28,6 +28,7 @@ class _RegisterBodyState extends State<RegisterBody> {
   String email = '';
   String fullname = '';
   String phone = '';
+  String address = '';
   String password = '';
   String repassword = '';
   final _formkey = GlobalKey<FormState>();
@@ -135,6 +136,33 @@ class _RegisterBodyState extends State<RegisterBody> {
                 height: 10,
               ),
               TextFormField(
+                onChanged: (value) {
+                  setState(() {
+                    address = value;
+                  });
+                },
+                validator: (value) {
+                  address = value!;
+                  if (address.isEmpty) {
+                    return 'Bạn chưa nhập địa chỉ';
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                    labelText: 'Address',
+                    hintText: 'Nhập địa chỉ',
+                    prefixIcon: Image.asset(
+                      'assets/images/address.png',
+                      width: 30,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    )),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              TextFormField(
                 obscureText: true,
                 onChanged: (value) {
                   setState(() {
@@ -197,13 +225,14 @@ class _RegisterBodyState extends State<RegisterBody> {
                 onPressed: () {
                   if (_formkey.currentState!.validate()) {
                     LoadingDialog.showLoadingDialog(context, 'Vui lòng đợi');
-                    authBloc.Register(email, password, fullname, phone, () {
-                      LoadingDialog.hideLoadingDialog(context);
+                    authBloc.Register(email, password, fullname, phone, address,
+                        () {
+                      LoadingDialog.hideLoadingDialog();
                       Helper.nextPage(context, const LoginScreen());
                       MsgDialog.showMsgDialog(context, "Đăng kí thành công",
                           "Vui lòng đăng nhập để tiếp tục sử dụng dịch vụ");
                     }, (msg) {
-                      LoadingDialog.hideLoadingDialog(context);
+                      LoadingDialog.hideLoadingDialog();
                       MsgDialog.showMsgDialog(context, "Errol", msg);
                     });
                   }

@@ -44,7 +44,7 @@ class _ListBillState extends State<ListBill> {
     MyProvider provider = context.read<MyProvider>();
     Get.put(BillRepository());
     return StreamBuilder<List<BillModel>>(
-      stream: BillRepository.instance.getListBillByUserId(provider.curUserId),
+      stream: BillRepository().getListBillByUserId(provider.curUserId),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           bills = snapshot.data!;

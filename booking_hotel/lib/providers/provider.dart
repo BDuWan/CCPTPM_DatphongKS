@@ -1,9 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
 class MyProvider extends ChangeNotifier {
   late String curUserId;
+  late String curEmail;
   late String roomId;
   late int floor;
   late int capacity;
@@ -12,9 +12,15 @@ class MyProvider extends ChangeNotifier {
   late String? choosedRoomId;
   late String? choosedBillId;
   late DateTime startDate;
-  late DateTime endDate ;
+  late DateTime endDate;
+
   void setCurUserId(String id) {
     curUserId = id;
+    notifyListeners();
+  }
+
+  void setCurEmail(String email) {
+    curEmail = email;
     notifyListeners();
   }
 
@@ -53,12 +59,12 @@ class MyProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setstartDate(String _startDate){
+  void setstartDate(String _startDate) {
     startDate = DateFormat('dd/MM/yyyy').parse(_startDate);
     notifyListeners();
   }
 
-  void setendDate(String _endDate){
+  void setendDate(String _endDate) {
     endDate = DateFormat('dd/MM/yyyy').parse(_endDate);
     notifyListeners();
   }
