@@ -30,7 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  firebase_auth:
+  firebase_auth: ^4.6.0
   firebase_database:
   firebase_core:
   provider:
@@ -48,6 +48,7 @@ dev_dependencies:
   mockito:
   build_runner:
   sembast:
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
